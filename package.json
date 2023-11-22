@@ -29,7 +29,7 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "start": "cross-env DISABLE_ESLINT_PLUGIN=true react-scripts start",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && cross-env DISABLE_ESLINT_PLUGIN=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

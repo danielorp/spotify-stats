@@ -18,11 +18,11 @@ export function App() {
         <Fragment>
           <Header />
           <Switch>
-            <Route exact path='/'>
+            <Route path='/'>
               <Home />
             </Route>
-            <Route path='*'>
-              <Redirect to='/' />
+            <Route path='/:access_token'>
+              <Home />
             </Route>
           </Switch>
           <Footer />

@@ -4,6 +4,7 @@ import { store } from '../../../state/store';
 import { useStoreWithInitializer } from '../../../state/storeHooks';
 import { FeedFilters } from '../../../types/article';
 import { ArticlesViewer } from '../../ArticlesViewer/ArticlesViewer';
+import { SpotifyViewer } from '../../SpotifyViewer/SpotifyViewer';
 import { changePage, loadArticles, startLoadingArticles } from '../../ArticlesViewer/ArticlesViewer.slice';
 import { ContainerPage } from '../../ContainerPage/ContainerPage';
 import { changeTab, loadTags, startLoadingTags } from './Home.slice';
@@ -13,20 +14,22 @@ export function Home() {
 
   return (
     <div className='home-page'>
-      {renderBanner()}
       <ContainerPage>
         <div className='col-md-9'>
-          <ArticlesViewer
+          <SpotifyViewer
             toggleClassName='feed-toggle'
             selectedTab={selectedTab}
             tabs={buildTabsNames(selectedTab)}
             onPageChange={onPageChange}
             onTabChange={onTabChange}
           />
-        </div>
-
-        <div className='col-md-3'>
-          <HomeSidebar tags={tags} />
+          {/* <ArticlesViewer
+            toggleClassName='feed-toggle'
+            selectedTab={selectedTab}
+            tabs={buildTabsNames(selectedTab)}
+            onPageChange={onPageChange}
+            onTabChange={onTabChange}
+          /> */}
         </div>
       </ContainerPage>
     </div>
@@ -46,14 +49,6 @@ async function load() {
 
   const tagsResult = await getTags();
   store.dispatch(loadTags(tagsResult.tags));
-}
-
-function renderBanner() {
-  return (
-    <div className='banner'>
-      <div className='container'></div>
-    </div>
-  );
 }
 
 function buildTabsNames(selectedTab: string) {
@@ -86,27 +81,5 @@ async function getFeedOrGlobalArticles(filters: FeedFilters = {}) {
 
   return await (selectedTab === 'Your Feed' ? getFeed : getArticles)(
     !selectedTab.startsWith('#') ? filters : finalFilters
-  );
-}
-
-function HomeSidebar({ tags }: { tags: Option<string[]> }) {
-  return (
-    <div className='sidebar'>
-      <p>Popular Tags</p>
-
-      {tags.match({
-        none: () => <span>Loading tags...</span>,
-        some: (tags) => (
-          <div className='tag-list'>
-            {' '}
-            {tags.map((tag) => (
-              <a key={tag} href='#' className='tag-pill tag-default' onClick={() => onTabChange(`# ${tag}`)}>
-                {tag}
-              </a>
-            ))}{' '}
-          </div>
-        ),
-      })}
-    </div>
   );
 }

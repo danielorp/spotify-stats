@@ -42,7 +42,6 @@ function GuestLinks() {
   return (
     <Fragment>
       <NavItem text='Sign in' href='/login' />
-      <NavItem text='Sign up' href='/register' />
     </Fragment>
   );
 }
