@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { setToken } from './SpotifyViewer.slice';
 import { useLocation } from 'react-router-dom';
 import { store } from '../../state/store';
+import { ContainerPage } from '../ContainerPage/ContainerPage';
+import SpotifyIconSvg from './SpotifyIcon';
 
 const CLIENT_ID = '3ee9aaca4953461db4d4845af26ad31d';
 const REDIRECT_URI = 'http://localhost:3000/';
@@ -57,20 +59,28 @@ export function SpotifyViewer({
     store.dispatch(setToken(full_token));
   }, []);
 
+  const redirect = () => {
+    window.location.replace(`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`);
+  };
+
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <h1>Spotify React</h1>
+    <div className='d-grid gap-2 col-6 mx-auto'>
+      <ContainerPage>
         {!token ? (
-          <a
-            href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
-          >
-            Login to Spotify
-          </a>
-        ) : (
-          "grid aqui"
-        )}
-      </header>
+          <div className='col-md-12 center-text'>
+            <div className='col-md-12 center-text'>
+              <h1 className='text-xs-center'>Connect your Spotify account</h1>
+            </div>
+            <p>&nbsp;</p>
+            <div className='col-md-12 text-xs-center'>
+              <button onClick={redirect} className='btn btn-lg btn-primary'>
+                <SpotifyIconSvg></SpotifyIconSvg>
+                <p>&nbsp; Let me in!</p>
+              </button>
+            </div>
+          </div>
+          ) : (<p>Logout</p>)}
+      </ContainerPage>
     </div>
   );
 }

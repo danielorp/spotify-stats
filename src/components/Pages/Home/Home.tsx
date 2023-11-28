@@ -15,7 +15,7 @@ export function Home() {
   return (
     <div className='home-page'>
       <ContainerPage>
-        <div className='col-md-9'>
+        <div className='col-md-12'>
           <SpotifyViewer
             toggleClassName='feed-toggle'
             selectedTab={selectedTab}
