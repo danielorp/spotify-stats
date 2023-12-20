@@ -12,9 +12,13 @@ Let's create a button that will redirect user to the Spotify authorization page:
     Let me in!
 </button>
 ```
+
+### 1.1 SPOTIFY_URL and Scopes
 The variable SPOTIFY_URL should follow the following pattern:
 
 `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${PERMISSIONS}`
+
+The variable `permissions` should be a space-separated string of required scopes to access a given resource in Spotify API. In my sample app we're using `user-read-recently-played user-read-currently-playing` because we want both recently played songs as well as the current one, if any.
 
 More information is provided by Spotify in their Getting Started API section.
 
@@ -73,4 +77,15 @@ spotifyApi.interceptors.request.use((request) => {
     }
     return request;
 });
+```
+Now we should be ready to go, let's issue some Spotify API calls.
+
+## 3. Retrieving song data
+With this simple query we're able to get the user's current song being played and store it in a React state variable.
+```
+api.get("https://api.spotify.com/v1/me/player/currently-playing/").then(data => {
+    if (data.data) {
+        setNowPlaying(data.data.item)
+    }
+})
 ```
