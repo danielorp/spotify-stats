@@ -7,7 +7,7 @@ import SpotifyIconSvg from './SpotifyIcon';
 import SpotifyGrid from '../Pages/SpotifyGrid/SpotifyGrid';
 import axios from 'axios';
 
-const CLIENT_ID = '3ee9aaca4953461db4d4845af26ad31d';
+const CLIENT_ID = 'YOUR-CLIENT-ID-HERE';
 const REDIRECT_URI = 'http://localhost:3000/';
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
 const PERMISSIONS = 'user-read-recently-played user-read-currently-playing'
@@ -26,9 +26,7 @@ export function SpotifyViewer({
   onPageChange?: (index: number) => void;
   onTabChange?: (tab: string) => void;
 }) {
-  const { loading, user, token } = useStore(({ spotifyUser }) => spotifyUser);
-
-  const { search } = useLocation();
+  const { token } = useStore(({ spotifyUser }) => spotifyUser);
 
   const getTokenFromLocationHash = (): string | null => {
     const hash = window.location.hash;
