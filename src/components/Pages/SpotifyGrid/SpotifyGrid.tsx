@@ -79,19 +79,19 @@ const SpotifyGrid = ({api}: any) => {
 
   return (
      <Slider {...settings}>
-        {/* (nowPlaying ? (
+        { (nowPlaying ? (
           <div key={0} style={styles.carouselItem}>
             <div style={styles.time}>Playing now</div>
-            <img src={nowPlaying?.item?.album?.images[0].url} alt="Album Cover" style={styles.albumCover} />
+            <img src={nowPlaying?.album?.images[0].url} alt="Album Cover" style={styles.albumCover} />
             <div style={styles.info}>
-              <div style={styles.trackTitle}>{nowPlaying?.item?.name}</div>
-              <div style={styles.artistName}>{nowPlaying?.item?.artists[0].name}</div>
+              <div style={styles.trackTitle}>{nowPlaying?.name}</div>
+              <div style={styles.artistName}>{nowPlaying?.artists[0].name}</div>
             </div>
           </div>
-          ) : ()
-        ) */}
+          ) : ("")
+        ) }
         {recentlyPlayedTracks.map((item, index) => (
-          <div key={index} style={styles.carouselItem}>
+          <div key={index+1} style={styles.carouselItem}>
             <div style={styles.time}>{parseDateTime(item.played_at)}</div>
             <img src={item.track.album.images[0].url} alt="Album Cover" style={styles.albumCover} />
             <div style={styles.info}>
