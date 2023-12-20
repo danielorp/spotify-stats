@@ -10,7 +10,7 @@ import axios from 'axios';
 const CLIENT_ID = '3ee9aaca4953461db4d4845af26ad31d';
 const REDIRECT_URI = 'http://localhost:3000/';
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
-const PERMISSIONS = 'user-read-recently-played'
+const PERMISSIONS = 'user-read-recently-played user-read-currently-playing'
 const RESPONSE_TYPE = 'token';
 
 export function SpotifyViewer({
