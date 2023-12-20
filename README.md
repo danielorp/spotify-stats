@@ -1,5 +1,9 @@
 ### Sample app to demonstrate OAuth authentication using Spotify API and axios in a React/Typescript environment.
 
+## Video demonstration
+
+https://github.com/danielorp/spotify-stats/assets/26673875/280bd7d4-299c-4583-92cb-0e0b041fe765
+
 
 With this sample app I created I was able to demonstrate the basic flow to integrate an OAuth-protected API in React.
 
